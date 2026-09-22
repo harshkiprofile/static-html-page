@@ -1,0 +1,2447 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8">
+<!-- Mobile-safe viewport -->
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta name="theme-color" content="#2a050d">
+
+<title>Harsh Weds Urvashi - Wedding Invitation</title>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+    rel="stylesheet"
+>
+
+<!-- FontAwesome -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+>
+
+<!-- Canvas Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+    /* =========================================================
+       FONTS
+    ========================================================= */
+
+    .font-script {
+        font-family: 'Great Vibes', cursive;
+    }
+
+    .font-serif-title {
+        font-family: 'Playfair Display', serif;
+    }
+
+    .font-royal {
+        font-family: 'Cinzel Decorative', cursive;
+    }
+
+    .font-sans-body {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* =========================================================
+       GLOBAL / MOBILE SAFETY
+    ========================================================= */
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+
+        background:
+            radial-gradient(
+                circle at center,
+                #580c1d 0%,
+                #2a050d 70%,
+                #120205 100%
+            );
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: 'Montserrat', sans-serif;
+
+        /* Prevent accidental text selection during interactions */
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    }
+
+    button,
+    a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+        font-family: inherit;
+    }
+
+    /* =========================================================
+       PETAL CANVAS
+    ========================================================= */
+
+    #petal-canvas {
+        position: fixed;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* =========================================================
+       MAIN CONTENT
+    ========================================================= */
+
+    main {
+        position: relative;
+        z-index: 20;
+    }
+
+    /* =========================================================
+       ENVELOPE WRAPPER
+    ========================================================= */
+
+    .envelope-wrapper {
+        position: relative;
+
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 1rem;
+
+        perspective: 1200px;
+        -webkit-perspective: 1200px;
+
+        transition:
+            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.8s ease;
+
+        will-change: transform, opacity;
+    }
+
+    /* =========================================================
+       ENVELOPE
+    ========================================================= */
+
+    .envelope {
+        position: relative;
+
+        width: min(480px, 90vw);
+        height: min(310px, 58vw);
+
+        min-height: 220px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #580c1d 0%,
+                #3e0714 100%
+            );
+
+        border-radius: 12px;
+
+        border: 1px solid rgba(212, 175, 55, 0.3);
+
+        box-shadow:
+            0 25px 50px rgba(0, 0, 0, 0.8),
+            0 0 25px rgba(212, 175, 55, 0.2);
+
+        overflow: visible;
+
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+
+        will-change: transform;
+    }
+
+    @media (max-width: 640px) {
+        .envelope {
+            width: 90vw;
+            max-width: 380px;
+            height: 250px;
+            min-height: 230px;
+        }
+    }
+
+    @media (max-height: 600px) and (orientation: landscape) {
+        .envelope {
+            height: 210px;
+            min-height: 190px;
+        }
+    }
+
+    /* =========================================================
+       ENVELOPE DECORATION
+    ========================================================= */
+
+    .envelope-pattern {
+        position: absolute;
+        inset: 0;
+
+        background-image:
+            radial-gradient(
+                #d4af37 0.75px,
+                transparent 0.75px
+            );
+
+        background-size: 16px 16px;
+
+        opacity: 0.1;
+
+        border-radius: 12px;
+
+        pointer-events: none;
+    }
+
+    .envelope-shimmer {
+        position: absolute;
+        inset: 0;
+
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                120deg,
+                transparent 0%,
+                rgba(212, 175, 55, 0.35) 50%,
+                transparent 100%
+            );
+
+        background-size: 200% 100%;
+        background-position: -100% 0;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        z-index: 5;
+    }
+
+    .embroidery-border {
+        position: absolute;
+        inset: 8px;
+
+        border: 2px dashed rgba(212, 175, 55, 0.4);
+
+        border-radius: 8px;
+
+        pointer-events: none;
+
+        transition: all 0.8s ease;
+    }
+
+    .gold-active .embroidery-border {
+        border-color: #d4af37;
+
+        box-shadow:
+            0 0 15px rgba(212, 175, 55, 0.7),
+            inset 0 0 15px rgba(212, 175, 55, 0.5);
+    }
+
+    .gold-active .envelope-shimmer {
+        opacity: 1;
+
+        animation: shimmerMove 1.5s forwards;
+        -webkit-animation: shimmerMove 1.5s forwards;
+    }
+
+    @keyframes shimmerMove {
+        0% {
+            background-position: -100% 0;
+        }
+
+        100% {
+            background-position: 200% 0;
+        }
+    }
+
+    /* =========================================================
+       GOLD CORNERS
+    ========================================================= */
+
+    .gold-floral-corner {
+        position: absolute;
+
+        pointer-events: none;
+
+        z-index: 6;
+
+        filter:
+            drop-shadow(
+                0 2px 4px rgba(0, 0, 0, 0.6)
+            );
+
+        -webkit-filter:
+            drop-shadow(
+                0 2px 4px rgba(0, 0, 0, 0.6)
+            );
+
+        transition: all 0.8s ease;
+    }
+
+    .gold-active .gold-floral-corner {
+        filter:
+            drop-shadow(
+                0 0 10px rgba(255, 215, 0, 0.9)
+            );
+
+        -webkit-filter:
+            drop-shadow(
+                0 0 10px rgba(255, 215, 0, 0.9)
+            );
+
+        transform: scale(1.08);
+    }
+
+    /* =========================================================
+       MANDALA
+    ========================================================= */
+
+    .golden-mandala-bg {
+        position: absolute;
+
+        top: 50%;
+        left: 50%;
+
+        width: 140px;
+        height: 140px;
+
+        transform:
+            translate(-50%, -50%);
+
+        -webkit-transform:
+            translate(-50%, -50%);
+
+        pointer-events: none;
+
+        opacity: 0.75;
+
+        z-index: 8;
+
+        transition:
+            transform 1s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 1s ease;
+
+        will-change: transform;
+    }
+
+    @media (max-width: 640px) {
+        .golden-mandala-bg {
+            width: 110px;
+            height: 110px;
+        }
+    }
+
+    .gold-active .golden-mandala-bg {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            rotate(90deg)
+            scale(1.15);
+
+        -webkit-transform:
+            translate(-50%, -50%)
+            rotate(90deg)
+            scale(1.15);
+    }
+
+    /* =========================================================
+       ENVELOPE FLAP
+    ========================================================= */
+
+    .envelope-flap {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 52%;
+
+        background:
+            linear-gradient(
+                180deg,
+                #6b0f24 0%,
+                #4a0816 100%
+            );
+
+        clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                50% 100%
+            );
+
+        -webkit-clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                50% 100%
+            );
+
+        transform-origin: top center;
+        -webkit-transform-origin: top center;
+
+        transition:
+            transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+        -webkit-transition:
+            -webkit-transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+        z-index: 25;
+
+        border-top:
+            1px solid rgba(212, 175, 55, 0.4);
+
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+
+        will-change: transform;
+    }
+
+    .envelope-flap-inner {
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                180deg,
+                #d4af37 0%,
+                #8c6a15 100%
+            );
+
+        clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                50% 100%
+            );
+
+        -webkit-clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                50% 100%
+            );
+
+        opacity: 0.15;
+    }
+
+    .envelope.open .envelope-flap {
+        transform: rotateX(180deg);
+        -webkit-transform: rotateX(180deg);
+
+        z-index: 1;
+    }
+
+    /* =========================================================
+       WAX SEAL
+    ========================================================= */
+
+    .wax-seal {
+        position: absolute;
+
+        top: 50%;
+        left: 50%;
+
+        width: 72px;
+        height: 72px;
+
+        transform:
+            translate(-50%, -50%);
+
+        -webkit-transform:
+            translate(-50%, -50%);
+
+        background:
+            radial-gradient(
+                circle,
+                #800c1d 0%,
+                #4a030f 80%,
+                #2b0007 100%
+            );
+
+        border-radius: 50%;
+
+        box-shadow:
+            0 8px 18px rgba(0, 0, 0, 0.7),
+            inset 0 2px 4px rgba(255, 255, 255, 0.3),
+            0 0 0 3px #580c1d;
+
+        cursor: pointer;
+
+        z-index: 30;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        touch-action: manipulation;
+
+        /* Lift out of the envelope's preserve-3d/backface-hidden
+           context so iOS/Android hit-testing sees this element
+           instead of swallowing the tap. */
+        transform: translate(-50%, -50%) translateZ(0);
+        -webkit-transform: translate(-50%, -50%) translateZ(0);
+
+        transition:
+            transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+            box-shadow 0.4s ease;
+
+        will-change: transform;
+    }
+
+    @media (max-width: 640px) {
+        .wax-seal {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .wax-seal:active {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+
+        -webkit-transform:
+            translate(-50%, -50%)
+            scale(1.08);
+    }
+
+    @media (hover: hover) {
+        .wax-seal:hover {
+            transform:
+                translate(-50%, -50%)
+                scale(1.08);
+
+            -webkit-transform:
+                translate(-50%, -50%)
+                scale(1.08);
+
+            box-shadow:
+                0 10px 22px rgba(0, 0, 0, 0.8),
+                0 0 15px rgba(212, 175, 55, 0.6);
+        }
+    }
+
+    .wax-seal-border {
+        position: absolute;
+        inset: 4px;
+
+        border:
+            2px dashed rgba(212, 175, 55, 0.6);
+
+        border-radius: 50%;
+
+        pointer-events: none;
+    }
+
+    .wax-seal-text {
+        font-family: 'Cinzel Decorative', serif;
+
+        font-weight: 700;
+        font-size: 20px;
+
+        color: #d4af37;
+
+        text-shadow:
+            1px 1px 2px #000;
+
+        pointer-events: none;
+    }
+
+    @media (max-width: 640px) {
+        .wax-seal-text {
+            font-size: 17px;
+        }
+    }
+
+    .wax-seal.glowing {
+        background:
+            radial-gradient(
+                circle,
+                #f3e5ab 0%,
+                #d4af37 60%,
+                #996515 100%
+            );
+
+        box-shadow:
+            0 0 30px #f3e5ab,
+            0 0 50px #d4af37;
+
+        animation:
+            sealPop 0.6s ease forwards;
+
+        -webkit-animation:
+            sealPop 0.6s ease forwards;
+    }
+
+    .wax-seal.glowing .wax-seal-text {
+        color: #3b0a14;
+        text-shadow: none;
+    }
+
+    .wax-seal.glowing .wax-seal-border {
+        border-color: #3b0a14;
+    }
+
+    @keyframes sealPop {
+        0% {
+            transform:
+                translate(-50%, -50%)
+                scale(1);
+        }
+
+        50% {
+            transform:
+                translate(-50%, -50%)
+                scale(1.25);
+        }
+
+        100% {
+            transform:
+                translate(-50%, -50%)
+                scale(0.9);
+
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    /* =========================================================
+       INVITATION CARD
+    ========================================================= */
+
+    .invitation-card {
+        width: calc(100% - 16px);
+        max-width: 480px;
+
+        background: #fffdf7;
+
+        border-radius: 16px;
+
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.6),
+            0 0 0 1px rgba(212, 175, 55, 0.4);
+
+        position: relative;
+
+        z-index: 20;
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.95);
+
+        -webkit-transform:
+            translateY(30px)
+            scale(0.95);
+
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+        -webkit-transition:
+            opacity 0.8s ease,
+            -webkit-transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+        pointer-events: none;
+
+        overflow: hidden;
+
+        margin: 0 auto;
+    }
+
+    @media (max-width: 400px) {
+        .invitation-card {
+            width: calc(100% - 12px);
+        }
+    }
+
+    .invitation-card.visible {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        -webkit-transform:
+            translateY(0)
+            scale(1);
+
+        pointer-events: auto;
+    }
+
+    .card-inner-border {
+        border:
+            2px solid #d4af37;
+
+        position: relative;
+
+        margin: 8px;
+
+        border-radius: 12px;
+
+        background:
+            radial-gradient(
+                circle at center,
+                #ffffff 0%,
+                #fffdf5 100%
+            );
+    }
+
+    /* =========================================================
+       SCRATCH CARD
+    ========================================================= */
+
+    .scratch-container {
+        position: relative;
+
+        width: 200px;
+        height: 76px;
+
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+    }
+
+    @media (max-width: 640px) {
+        .scratch-container {
+            width: 170px;
+            height: 70px;
+        }
+    }
+
+    #scratch-canvas {
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: block;
+
+        cursor: pointer;
+
+        touch-action: none;
+
+        -webkit-touch-callout: none;
+
+        z-index: 2;
+
+        border-radius: 8px;
+    }
+
+    .revealed-date {
+        position: relative;
+
+        z-index: 1;
+
+        font-family: 'Playfair Display', serif;
+
+        font-weight: 700;
+
+        color: #580c1d;
+
+        text-shadow:
+            0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    /* =========================================================
+       AUDIO BUTTON
+    ========================================================= */
+
+    .audio-btn {
+        background:
+            rgba(59, 10, 20, 0.85);
+
+        border:
+            1px solid rgba(212, 175, 55, 0.5);
+
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+
+        touch-action: manipulation;
+    }
+
+    /* =========================================================
+       ACCESSIBILITY / REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+</style>
+
+</head> <body class="text-slate-800 relative">
+<!-- =========================================================
+     PETALS
+========================================================== -->
+
+<canvas id="petal-canvas"></canvas>
+
+<!-- =========================================================
+     FLOATING CONTROLS
+========================================================== -->
+
+<div
+    class="fixed top-3 right-3 sm:top-5 sm:right-5 z-50 flex items-center gap-2 sm:gap-3"
+>
+    <button
+        id="music-toggle"
+        type="button"
+        class="audio-btn text-amber-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg hover:scale-110 active:scale-95 transition duration-300 flex items-center justify-center"
+        title="Toggle Sound"
+        aria-label="Toggle Sound"
+    >
+        <i class="fas fa-music text-sm sm:text-lg"></i>
+    </button>
+
+    <button
+        id="reset-btn"
+        type="button"
+        class="audio-btn text-amber-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg hover:scale-110 active:scale-95 transition duration-300 flex items-center justify-center"
+        title="Replay Unboxing"
+        aria-label="Replay Unboxing"
+    >
+        <i class="fas fa-redo-alt text-sm sm:text-lg"></i>
+    </button>
+</div>
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<main
+    class="relative z-20 flex flex-col items-center justify-center w-full max-w-xl p-2 sm:p-4"
+>
+
+    <!-- =====================================================
+         ENVELOPE
+    ====================================================== -->
+
+    <div id="envelope-wrapper" class="envelope-wrapper">
+
+        <div
+            id="envelope"
+            class="envelope flex flex-col justify-center items-center"
+        >
+
+            <div class="envelope-pattern"></div>
+
+            <div class="envelope-shimmer"></div>
+
+            <div class="embroidery-border"></div>
+
+            <!-- SVG definition -->
+            <svg
+                class="hidden"
+                aria-hidden="true"
+            >
+                <defs>
+                    <linearGradient
+                        id="goldGradTL"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                    >
+                        <stop
+                            offset="0%"
+                            stop-color="#fff176"
+                        />
+                        <stop
+                            offset="50%"
+                            stop-color="#d4af37"
+                        />
+                        <stop
+                            offset="100%"
+                            stop-color="#996515"
+                        />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- Top Left -->
+            <svg
+                class="gold-floral-corner top-1.5 left-1.5 w-12 h-12 sm:w-16 sm:h-16"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+            >
+                <path
+                    d="M 8,8 L 8,45 C 8,30 20,20 35,20 C 50,20 40,8 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <path
+                    d="M 8,8 L 45,8 C 30,8 20,20 20,35 C 20,50 8,40 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <circle
+                    cx="26"
+                    cy="26"
+                    r="4"
+                    fill="url(#goldGradTL)"
+                />
+            </svg>
+
+            <!-- Top Right -->
+            <svg
+                class="gold-floral-corner top-1.5 right-1.5 w-12 h-12 sm:w-16 sm:h-16 -scale-x-100"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+            >
+                <path
+                    d="M 8,8 L 8,45 C 8,30 20,20 35,20 C 50,20 40,8 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <path
+                    d="M 8,8 L 45,8 C 30,8 20,20 20,35 C 20,50 8,40 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <circle
+                    cx="26"
+                    cy="26"
+                    r="4"
+                    fill="url(#goldGradTL)"
+                />
+            </svg>
+
+            <!-- Bottom Left -->
+            <svg
+                class="gold-floral-corner bottom-1.5 left-1.5 w-12 h-12 sm:w-16 sm:h-16 -scale-y-100"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+            >
+                <path
+                    d="M 8,8 L 8,45 C 8,30 20,20 35,20 C 50,20 40,8 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <path
+                    d="M 8,8 L 45,8 C 30,8 20,20 20,35 C 20,50 8,40 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <circle
+                    cx="26"
+                    cy="26"
+                    r="4"
+                    fill="url(#goldGradTL)"
+                />
+            </svg>
+
+            <!-- Bottom Right -->
+            <svg
+                class="gold-floral-corner bottom-1.5 right-1.5 w-12 h-12 sm:w-16 sm:h-16 rotate-180"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+            >
+                <path
+                    d="M 8,8 L 8,45 C 8,30 20,20 35,20 C 50,20 40,8 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <path
+                    d="M 8,8 L 45,8 C 30,8 20,20 20,35 C 20,50 8,40 8,8 Z"
+                    fill="url(#goldGradTL)"
+                />
+
+                <circle
+                    cx="26"
+                    cy="26"
+                    r="4"
+                    fill="url(#goldGradTL)"
+                />
+            </svg>
+
+            <!-- =================================================
+                 MANDALA
+            ================================================== -->
+
+            <svg
+                class="golden-mandala-bg"
+                viewBox="0 0 200 200"
+                aria-hidden="true"
+            >
+                <g
+                    fill="none"
+                    stroke="url(#goldGradTL)"
+                    stroke-width="1.5"
+                >
+                    <circle
+                        cx="100"
+                        cy="100"
+                        r="68"
+                        stroke-dasharray="4,3"
+                    />
+
+                    <circle
+                        cx="100"
+                        cy="100"
+                        r="76"
+                    />
+
+                    <path
+                        d="M 100,20 C 110,35 110,45 100,52 C 90,45 90,35 100,20 Z"
+                        fill="url(#goldGradTL)"
+                        opacity="0.8"
+                    />
+
+                    <path
+                        d="M 100,180 C 110,165 110,155 100,148 C 90,155 90,165 100,180 Z"
+                        fill="url(#goldGradTL)"
+                        opacity="0.8"
+                    />
+
+                    <path
+                        d="M 20,100 C 35,110 45,110 52,100 C 45,90 35,90 20,100 Z"
+                        fill="url(#goldGradTL)"
+                        opacity="0.8"
+                    />
+
+                    <path
+                        d="M 180,100 C 165,110 155,110 148,100 C 155,90 165,90 180,100 Z"
+                        fill="url(#goldGradTL)"
+                        opacity="0.8"
+                    />
+                </g>
+            </svg>
+
+            <!-- =================================================
+                 FLAP
+            ================================================== -->
+
+            <div
+                id="envelope-flap"
+                class="envelope-flap"
+            >
+                <div class="envelope-flap-inner"></div>
+
+                <svg
+                    class="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-10 text-amber-300 opacity-80 pointer-events-none"
+                    viewBox="0 0 120 50"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M 10,10 Q 60,35 110,10 Q 60,45 10,10 Z"
+                        fill="url(#goldGradTL)"
+                        opacity="0.7"
+                    />
+
+                    <circle
+                        cx="60"
+                        cy="24"
+                        r="5"
+                        fill="#fff176"
+                    />
+                </svg>
+            </div>
+
+            <!-- =================================================
+                 WAX SEAL
+            ================================================== -->
+
+            <div
+                id="wax-seal"
+                class="wax-seal"
+                role="button"
+                tabindex="0"
+                aria-label="Tap to Open"
+            >
+                <div class="wax-seal-border"></div>
+
+                <span class="wax-seal-text">
+                    HU
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =====================================================
+         INVITATION
+    ====================================================== -->
+
+    <div
+        id="invitation-card"
+        class="invitation-card hidden"
+    >
+
+        <div
+            class="card-inner-border p-4 sm:p-7 text-center flex flex-col items-center"
+        >
+
+            <!-- Family -->
+            <div
+                class="text-amber-700 text-[10px] sm:text-xs tracking-widest uppercase mb-1 font-sans-body font-semibold"
+            >
+                <i class="fas fa-om mr-1"></i>
+
+                Together with their families
+
+                <i class="fas fa-om ml-1"></i>
+            </div>
+
+            <!-- Names -->
+            <div class="my-2 space-y-2.5">
+
+                <div>
+                    <h1
+                        class="font-script text-3xl sm:text-5xl text-amber-950 leading-tight"
+                    >
+                        Harsh
+                    </h1>
+
+                    <p
+                        class="font-sans-body text-[11px] sm:text-xs text-amber-900 font-medium tracking-wide"
+                    >
+                        S/O Sanjay Maheshwari &amp; Sulakshna Maheshwari
+                    </p>
+                </div>
+
+                <div
+                    class="font-serif-title italic text-amber-700 text-lg sm:text-xl font-bold my-0.5"
+                >
+                    weds
+                </div>
+
+                <div>
+                    <h1
+                        class="font-script text-3xl sm:text-5xl text-amber-950 leading-tight"
+                    >
+                        Urvashi
+                    </h1>
+
+                    <p
+                        class="font-sans-body text-[11px] sm:text-xs text-amber-900 font-medium tracking-wide"
+                    >
+                        D/O Pradeep Gupta &amp; Kiran Gupta
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Invitation text -->
+            <p
+                class="font-serif-title italic text-amber-900 text-xs sm:text-sm my-2"
+            >
+                request the honor of your presence to celebrate their wedding
+            </p>
+
+            <!-- Divider -->
+            <div
+                class="flex items-center justify-center my-2 w-full max-w-xs"
+            >
+                <div class="h-[1px] bg-amber-300 flex-1"></div>
+
+                <div class="px-3 text-amber-600">
+                    <i class="fas fa-heart text-xs"></i>
+                </div>
+
+                <div class="h-[1px] bg-amber-300 flex-1"></div>
+            </div>
+
+            <!-- =================================================
+                 SCRATCH CARD
+            ================================================== -->
+
+            <div class="my-2 text-center w-full">
+
+                <p
+                    class="font-sans-body text-[11px] sm:text-xs font-semibold text-amber-900 tracking-wider uppercase mb-1.5"
+                >
+                    <i
+                        class="fas fa-hand-pointer text-amber-600 animate-bounce mr-1"
+                    ></i>
+
+                    Scratch heart to reveal date
+                </p>
+
+                <div
+                    class="scratch-container shadow-inner rounded-xl bg-amber-50 p-1 border border-amber-200"
+                >
+
+                    <div
+                        class="revealed-date flex flex-col justify-center items-center h-full w-full"
+                    >
+                        <span
+                            class="text-[10px] uppercase tracking-widest text-amber-700 font-sans-body"
+                        >
+                            Save The Date
+                        </span>
+
+                        <span
+                            class="font-royal text-base sm:text-xl text-rose-900 font-bold"
+                        >
+                            21st November
+                        </span>
+                    </div>
+
+                    <canvas
+                        id="scratch-canvas"
+                        aria-label="Scratch to reveal wedding date"
+                    ></canvas>
+
+                </div>
+            </div>
+
+            <!-- =================================================
+                 VENUE
+            ================================================== -->
+
+            <div
+                class="mt-3 p-3 rounded-lg bg-amber-50/90 border border-amber-200 w-full max-w-sm"
+            >
+
+                <div
+                    class="text-rose-900 font-serif-title font-semibold text-sm sm:text-base flex items-center justify-center gap-1.5"
+                >
+                    <i
+                        class="fas fa-map-marker-alt text-amber-600"
+                    ></i>
+
+                    D&amp;S Convention
+                </div>
+
+                <p
+                    class="text-slate-700 font-sans-body text-xs mt-0.5"
+                >
+                    Sector 70, Gurgaon
+                </p>
+
+                <a
+                    href="https://maps.google.com/?q=D%26S+Convention+Sector+70+Gurgaon"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 text-[11px] font-sans-body text-amber-800 hover:text-amber-950 underline mt-1"
+                >
+                    <i class="fas fa-directions"></i>
+                    View on Google Maps
+                </a>
+
+            </div>
+
+            <!-- =================================================
+                 BLESSINGS
+            ================================================== -->
+
+            <div class="mt-4 flex justify-center">
+
+                <button
+                    id="blessings-btn"
+                    type="button"
+                    class="px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-600 to-rose-800 text-white font-sans-body text-xs font-semibold tracking-wider shadow-md hover:shadow-xl active:scale-95 transition duration-300 flex items-center gap-2"
+                >
+                    <i class="fas fa-glass-cheers"></i>
+                    Send Blessings
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<!-- =============================================================
+     JAVASCRIPT
+============================================================= -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        /* =====================================================
+           ELEMENTS
+        ====================================================== */
+
+        const waxSeal =
+            document.getElementById('wax-seal');
+
+        const envelope =
+            document.getElementById('envelope');
+
+        const envelopeWrapper =
+            document.getElementById('envelope-wrapper');
+
+        const invitationCard =
+            document.getElementById('invitation-card');
+
+        const scratchCanvas =
+            document.getElementById('scratch-canvas');
+
+        const scratchCtx =
+            scratchCanvas.getContext('2d', {
+                willReadFrequently: true
+            });
+
+        const musicBtn =
+            document.getElementById('music-toggle');
+
+        const resetBtn =
+            document.getElementById('reset-btn');
+
+        const blessingsBtn =
+            document.getElementById('blessings-btn');
+
+        const petalCanvas =
+            document.getElementById('petal-canvas');
+
+        const pCtx =
+            petalCanvas.getContext('2d');
+
+        /* =====================================================
+           STATE
+        ====================================================== */
+
+        let isOpened = false;
+        let audioContext = null;
+        let isMuted = false;
+
+        let scratchInitialized = false;
+        let isScratching = false;
+        let scratchComplete = false;
+
+        /* =====================================================
+           PETAL CANVAS
+        ====================================================== */
+
+        function resizePetalCanvas() {
+            const dpr =
+                Math.min(window.devicePixelRatio || 1, 2);
+
+            const width =
+                window.innerWidth;
+
+            const height =
+                window.innerHeight;
+
+            petalCanvas.width =
+                Math.floor(width * dpr);
+
+            petalCanvas.height =
+                Math.floor(height * dpr);
+
+            petalCanvas.style.width =
+                `${width}px`;
+
+            petalCanvas.style.height =
+                `${height}px`;
+
+            pCtx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
+        }
+
+        resizePetalCanvas();
+
+        window.addEventListener(
+            'resize',
+            resizePetalCanvas,
+            { passive: true }
+        );
+
+        /* =====================================================
+           PETALS
+        ====================================================== */
+
+        class Petal {
+
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+
+                this.x =
+                    Math.random() *
+                    window.innerWidth;
+
+                this.y = -20;
+
+                this.size =
+                    Math.random() * 10 + 6;
+
+                this.speedY =
+                    Math.random() * 1.2 + 0.6;
+
+                this.speedX =
+                    Math.random() * 0.8 - 0.4;
+
+                this.angle =
+                    Math.random() * 360;
+
+                this.spin =
+                    Math.random() * 2 - 1;
+
+                const colors = [
+                    '#f43f5e',
+                    '#fb7185',
+                    '#fda4af',
+                    '#e11d48',
+                    '#fef08a'
+                ];
+
+                this.color =
+                    colors[
+                        Math.floor(
+                            Math.random() *
+                            colors.length
+                        )
+                    ];
+
+                this.opacity =
+                    Math.random() * 0.6 + 0.3;
+            }
+
+            update() {
+
+                this.y += this.speedY;
+
+                this.x +=
+                    Math.sin(this.y * 0.01) +
+                    this.speedX;
+
+                this.angle += this.spin;
+
+                if (
+                    this.y >
+                    window.innerHeight + 20
+                ) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+
+                pCtx.save();
+
+                pCtx.translate(
+                    this.x,
+                    this.y
+                );
+
+                pCtx.rotate(
+                    this.angle *
+                    Math.PI /
+                    180
+                );
+
+                pCtx.globalAlpha =
+                    this.opacity;
+
+                pCtx.fillStyle =
+                    this.color;
+
+                pCtx.beginPath();
+
+                pCtx.moveTo(0, 0);
+
+                pCtx.bezierCurveTo(
+                    -this.size,
+                    -this.size,
+                    -this.size,
+                    this.size,
+                    0,
+                    this.size * 1.5
+                );
+
+                pCtx.bezierCurveTo(
+                    this.size,
+                    this.size,
+                    this.size,
+                    -this.size,
+                    0,
+                    0
+                );
+
+                pCtx.fill();
+
+                pCtx.restore();
+            }
+        }
+
+        const petals =
+            Array.from(
+                { length: 28 },
+                () => new Petal()
+            );
+
+        function animatePetals() {
+
+            pCtx.clearRect(
+                0,
+                0,
+                window.innerWidth,
+                window.innerHeight
+            );
+
+            petals.forEach(petal => {
+                petal.update();
+                petal.draw();
+            });
+
+            requestAnimationFrame(
+                animatePetals
+            );
+        }
+
+        animatePetals();
+
+        /* =====================================================
+           AUDIO
+        ====================================================== */
+
+        function playAudio(type) {
+
+            if (isMuted) return;
+
+            try {
+
+                const AudioCtx =
+                    window.AudioContext ||
+                    window.webkitAudioContext;
+
+                if (!AudioCtx) return;
+
+                if (!audioContext) {
+                    audioContext =
+                        new AudioCtx();
+                }
+
+                if (
+                    audioContext.state ===
+                    'suspended'
+                ) {
+                    audioContext.resume()
+                        .catch(() => {});
+                }
+
+                if (type === 'chime') {
+
+                    const osc =
+                        audioContext.createOscillator();
+
+                    const gain =
+                        audioContext.createGain();
+
+                    osc.connect(gain);
+                    gain.connect(
+                        audioContext.destination
+                    );
+
+                    const now =
+                        audioContext.currentTime;
+
+                    osc.type = 'sine';
+
+                    osc.frequency.setValueAtTime(
+                        523.25,
+                        now
+                    );
+
+                    osc.frequency.exponentialRampToValueAtTime(
+                        1046.50,
+                        now + 0.4
+                    );
+
+                    gain.gain.setValueAtTime(
+                        0.12,
+                        now
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        0.001,
+                        now + 0.4
+                    );
+
+                    osc.start(now);
+                    osc.stop(now + 0.4);
+                }
+
+                if (type === 'scratch') {
+
+                    const bufferSize =
+                        Math.floor(
+                            audioContext.sampleRate *
+                            0.025
+                        );
+
+                    const buffer =
+                        audioContext.createBuffer(
+                            1,
+                            bufferSize,
+                            audioContext.sampleRate
+                        );
+
+                    const output =
+                        buffer.getChannelData(0);
+
+                    for (
+                        let i = 0;
+                        i < bufferSize;
+                        i++
+                    ) {
+                        output[i] =
+                            Math.random() * 2 - 1;
+                    }
+
+                    const noise =
+                        audioContext.createBufferSource();
+
+                    noise.buffer = buffer;
+
+                    const filter =
+                        audioContext.createBiquadFilter();
+
+                    filter.type =
+                        'bandpass';
+
+                    filter.frequency.value =
+                        850;
+
+                    const gain =
+                        audioContext.createGain();
+
+                    noise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(
+                        audioContext.destination
+                    );
+
+                    const now =
+                        audioContext.currentTime;
+
+                    gain.gain.setValueAtTime(
+                        0.03,
+                        now
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        0.001,
+                        now + 0.025
+                    );
+
+                    noise.start(now);
+                }
+
+            } catch (error) {
+                /* Audio is optional */
+            }
+        }
+
+        /* =====================================================
+           ROUNDED RECT
+        ====================================================== */
+
+        function drawRoundedRect(
+            ctx,
+            x,
+            y,
+            w,
+            h,
+            r
+        ) {
+
+            const radius =
+                Math.min(
+                    r,
+                    w / 2,
+                    h / 2
+                );
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x + radius,
+                y
+            );
+
+            ctx.arcTo(
+                x + w,
+                y,
+                x + w,
+                y + h,
+                radius
+            );
+
+            ctx.arcTo(
+                x + w,
+                y + h,
+                x,
+                y + h,
+                radius
+            );
+
+            ctx.arcTo(
+                x,
+                y + h,
+                x,
+                y,
+                radius
+            );
+
+            ctx.arcTo(
+                x,
+                y,
+                x + w,
+                y,
+                radius
+            );
+
+            ctx.closePath();
+        }
+
+        /* =====================================================
+           SCRATCH CARD
+        ====================================================== */
+
+        function setupScratchCard() {
+
+            const container =
+                scratchCanvas.parentElement;
+
+            if (!container) return;
+
+            const width =
+                container.clientWidth;
+
+            const height =
+                container.clientHeight;
+
+            /* Important:
+               Don't initialize while hidden */
+            if (
+                width <= 0 ||
+                height <= 0
+            ) {
+                return;
+            }
+
+            const dpr =
+                Math.min(
+                    window.devicePixelRatio || 1,
+                    2
+                );
+
+            scratchCanvas.width =
+                Math.floor(width * dpr);
+
+            scratchCanvas.height =
+                Math.floor(height * dpr);
+
+            scratchCanvas.style.width =
+                `${width}px`;
+
+            scratchCanvas.style.height =
+                `${height}px`;
+
+            scratchCtx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
+
+            scratchCtx.clearRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+            /* Red scratch surface */
+
+            scratchCtx.save();
+
+            scratchCtx.globalCompositeOperation =
+                'source-over';
+
+            scratchCtx.fillStyle =
+                '#b91c1c';
+
+            drawRoundedRect(
+                scratchCtx,
+                0,
+                0,
+                width,
+                height,
+                8
+            );
+
+            scratchCtx.fill();
+
+            /* Label */
+
+            scratchCtx.fillStyle =
+                '#fef08a';
+
+            scratchCtx.font =
+                'bold 11px Montserrat, sans-serif';
+
+            scratchCtx.textAlign =
+                'center';
+
+            scratchCtx.textBaseline =
+                'middle';
+
+            scratchCtx.fillText(
+                '♥ SCRATCH HERE ♥',
+                width / 2,
+                height / 2
+            );
+
+            scratchCtx.restore();
+
+            if (!scratchInitialized) {
+
+                scratchCanvas.addEventListener(
+                    'pointerdown',
+                    scratchStart,
+                    { passive: false }
+                );
+
+                scratchCanvas.addEventListener(
+                    'pointermove',
+                    scratchMove,
+                    { passive: false }
+                );
+
+                scratchCanvas.addEventListener(
+                    'pointerup',
+                    scratchEnd,
+                    { passive: false }
+                );
+
+                scratchCanvas.addEventListener(
+                    'pointercancel',
+                    scratchEnd,
+                    { passive: false }
+                );
+
+                scratchInitialized = true;
+            }
+
+            scratchComplete = false;
+        }
+
+        /* =====================================================
+           SCRATCH COORDINATES
+        ====================================================== */
+
+        function getScratchCoords(e) {
+
+            const rect =
+                scratchCanvas.getBoundingClientRect();
+
+            const scaleX =
+                scratchCanvas.width /
+                (rect.width || 1);
+
+            const scaleY =
+                scratchCanvas.height /
+                (rect.height || 1);
+
+            /*
+             * Because the canvas uses a device-pixel-ratio
+             * backing store, convert the pointer position
+             * back into CSS coordinates before drawing.
+             */
+
+            return {
+                x:
+                    (e.clientX - rect.left) *
+                    scaleX,
+
+                y:
+                    (e.clientY - rect.top) *
+                    scaleY
+            };
+        }
+
+        /* =====================================================
+           SCRATCH START
+        ====================================================== */
+
+        function scratchStart(e) {
+
+            if (scratchComplete) return;
+
+            e.preventDefault();
+
+            isScratching = true;
+
+            try {
+                scratchCanvas.setPointerCapture(
+                    e.pointerId
+                );
+            } catch (_) {}
+
+            scratch(e);
+        }
+
+        /* =====================================================
+           SCRATCH MOVE
+        ====================================================== */
+
+        function scratchMove(e) {
+
+            if (
+                !isScratching ||
+                scratchComplete
+            ) {
+                return;
+            }
+
+            e.preventDefault();
+
+            scratch(e);
+        }
+
+        /* =====================================================
+           SCRATCH END
+        ====================================================== */
+
+        function scratchEnd(e) {
+
+            isScratching = false;
+
+            if (
+                e &&
+                e.pointerId !== undefined
+            ) {
+                try {
+                    scratchCanvas.releasePointerCapture(
+                        e.pointerId
+                    );
+                } catch (_) {}
+            }
+        }
+
+        /* =====================================================
+           ACTUAL SCRATCH
+        ====================================================== */
+
+        function scratch(e) {
+
+            const {
+                x,
+                y
+            } = getScratchCoords(e);
+
+            scratchCtx.save();
+
+            scratchCtx.globalCompositeOperation =
+                'destination-out';
+
+            scratchCtx.beginPath();
+
+            /*
+             * Radius is scaled according to DPR
+             */
+            const radius =
+                16 *
+                Math.min(
+                    window.devicePixelRatio || 1,
+                    2
+                );
+
+            scratchCtx.arc(
+                x,
+                y,
+                radius,
+                0,
+                Math.PI * 2
+            );
+
+            scratchCtx.fill();
+
+            scratchCtx.restore();
+
+            playAudio('scratch');
+
+            checkScratchPercentage();
+        }
+
+        /* =====================================================
+           SCRATCH PERCENTAGE
+        ====================================================== */
+
+        let lastScratchCheck = 0;
+
+        function checkScratchPercentage() {
+
+            const now =
+                performance.now();
+
+            /*
+             * Don't run getImageData on every single
+             * pointer event. This is expensive on phones.
+             */
+            if (
+                now - lastScratchCheck <
+                120
+            ) {
+                return;
+            }
+
+            lastScratchCheck = now;
+
+            try {
+
+                const canvasWidth =
+                    scratchCanvas.width;
+
+                const canvasHeight =
+                    scratchCanvas.height;
+
+                const imgData =
+                    scratchCtx.getImageData(
+                        0,
+                        0,
+                        canvasWidth,
+                        canvasHeight
+                    );
+
+                const pixels =
+                    imgData.data;
+
+                let cleared = 0;
+
+                /*
+                 * Sample every 16th alpha pixel.
+                 * Much faster on high-DPI iPhones.
+                 */
+                const step = 16;
+
+                let total = 0;
+
+                for (
+                    let i = 3;
+                    i < pixels.length;
+                    i += 4 * step
+                ) {
+
+                    total++;
+
+                    if (
+                        pixels[i] === 0
+                    ) {
+                        cleared++;
+                    }
+                }
+
+                if (
+                    total > 0 &&
+                    cleared / total > 0.35
+                ) {
+
+                    scratchComplete = true;
+
+                    scratchCanvas.style.transition =
+                        'opacity 0.5s ease';
+
+                    scratchCanvas.style.opacity =
+                        '0';
+
+                    setTimeout(() => {
+
+                        scratchCanvas.style.display =
+                            'none';
+
+                    }, 500);
+
+                    if (
+                        typeof confetti ===
+                        'function'
+                    ) {
+                        confetti({
+                            particleCount: 50,
+                            spread: 60,
+                            origin: {
+                                y: 0.75
+                            }
+                        });
+                    }
+                }
+
+            } catch (_) {
+                /* Canvas read errors ignored */
+            }
+        }
+
+        /* =====================================================
+           OPEN ENVELOPE
+        ====================================================== */
+
+        function handleSealOpen(e) {
+
+            if (e) {
+                e.preventDefault();
+            }
+
+            if (isOpened) {
+                return;
+            }
+
+            isOpened = true;
+
+            playAudio('chime');
+
+            waxSeal.classList.add(
+                'glowing'
+            );
+
+            envelope.classList.add(
+                'gold-active'
+            );
+
+            /* Open flap */
+
+            setTimeout(() => {
+
+                envelope.classList.add(
+                    'open'
+                );
+
+            }, 700);
+
+            /* Remove envelope */
+
+            setTimeout(() => {
+
+                envelopeWrapper.style.transform =
+                    'translateY(-60px) scale(0.85)';
+
+                envelopeWrapper.style.opacity =
+                    '0';
+
+                setTimeout(() => {
+
+                    envelopeWrapper.classList.add(
+                        'hidden'
+                    );
+
+                    invitationCard.classList.remove(
+                        'hidden'
+                    );
+
+                    /*
+                     * Wait until the browser has laid out
+                     * the card before measuring the canvas.
+                     */
+                    requestAnimationFrame(() => {
+
+                        invitationCard.classList.add(
+                            'visible'
+                        );
+
+                        requestAnimationFrame(() => {
+
+                            setupScratchCard();
+
+                        });
+
+                    });
+
+                    if (
+                        typeof confetti ===
+                        'function'
+                    ) {
+                        confetti({
+                            particleCount: 80,
+                            spread: 90,
+                            origin: {
+                                y: 0.6
+                            },
+                            colors: [
+                                '#d4af37',
+                                '#f43f5e',
+                                '#ffffff',
+                                '#fb7185'
+                            ]
+                        });
+                    }
+
+                }, 400);
+
+            }, 1500);
+        }
+
+        /* =====================================================
+           WAX SEAL
+           POINTER EVENTS WORK FOR:
+           - iPhone
+           - iPad
+           - Android
+           - Desktop
+           - Stylus
+        ====================================================== */
+
+        waxSeal.addEventListener(
+            'pointerup',
+            handleSealOpen,
+            { passive: false }
+        );
+
+        /* Fallback: some Android/iOS WebViews swallow pointer
+           events on elements inside a 3D transform context. */
+        waxSeal.addEventListener(
+            'click',
+            handleSealOpen
+        );
+
+        waxSeal.addEventListener(
+            'keydown',
+            (e) => {
+
+                if (
+                    e.key === 'Enter' ||
+                    e.key === ' '
+                ) {
+                    e.preventDefault();
+                    handleSealOpen(e);
+                }
+
+            }
+        );
+
+        /* =====================================================
+           BLESSINGS
+        ====================================================== */
+
+        blessingsBtn.addEventListener(
+            'pointerup',
+            (e) => {
+
+                e.preventDefault();
+
+                if (
+                    typeof confetti ===
+                    'function'
+                ) {
+                    confetti({
+                        particleCount: 90,
+                        spread: 80,
+                        origin: {
+                            y: 0.6
+                        },
+                        colors: [
+                            '#d4af37',
+                            '#e11d48',
+                            '#fef08a'
+                        ]
+                    });
+                }
+
+                blessingsBtn.innerHTML =
+                    '<i class="fas fa-check-circle"></i> Blessings Sent!';
+
+                blessingsBtn.classList.remove(
+                    'from-amber-600',
+                    'to-rose-800'
+                );
+
+                blessingsBtn.classList.add(
+                    'bg-emerald-700'
+                );
+            },
+            { passive: false }
+        );
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        resetBtn.addEventListener(
+            'pointerup',
+            (e) => {
+
+                e.preventDefault();
+
+                isOpened = false;
+
+                invitationCard.classList.remove(
+                    'visible'
+                );
+
+                setTimeout(() => {
+
+                    invitationCard.classList.add(
+                        'hidden'
+                    );
+
+                    envelopeWrapper.classList.remove(
+                        'hidden'
+                    );
+
+                    envelopeWrapper.style.transform =
+                        'none';
+
+                    envelopeWrapper.style.opacity =
+                        '1';
+
+                    envelope.classList.remove(
+                        'open',
+                        'gold-active'
+                    );
+
+                    waxSeal.classList.remove(
+                        'glowing'
+                    );
+
+                    /* Reset scratch card */
+
+                    scratchCanvas.style.display =
+                        'block';
+
+                    scratchCanvas.style.opacity =
+                        '1';
+
+                    scratchComplete = false;
+
+                    /*
+                     * Since the canvas event listeners
+                     * are only installed once, this does
+                     * NOT create duplicate listeners.
+                     */
+                    setupScratchCard();
+
+                    /* Reset button */
+
+                    blessingsBtn.innerHTML =
+                        '<i class="fas fa-glass-cheers"></i> Send Blessings';
+
+                    blessingsBtn.classList.add(
+                        'from-amber-600',
+                        'to-rose-800'
+                    );
+
+                    blessingsBtn.classList.remove(
+                        'bg-emerald-700'
+                    );
+
+                }, 400);
+            },
+            { passive: false }
+        );
+
+        /* =====================================================
+           MUSIC
+        ====================================================== */
+
+        musicBtn.addEventListener(
+            'pointerup',
+            (e) => {
+
+                e.preventDefault();
+
+                isMuted = !isMuted;
+
+                if (isMuted) {
+
+                    musicBtn.innerHTML =
+                        '<i class="fas fa-volume-mute text-base sm:text-lg"></i>';
+
+                    musicBtn.classList.add(
+                        'opacity-50'
+                    );
+
+                } else {
+
+                    musicBtn.innerHTML =
+                        '<i class="fas fa-music text-base sm:text-lg"></i>';
+
+                    musicBtn.classList.remove(
+                        'opacity-50'
+                    );
+
+                    /*
+                     * This happens directly from
+                     * the user interaction, so Safari
+                     * allows AudioContext.resume().
+                     */
+                    playAudio('chime');
+                }
+
+            },
+            { passive: false }
+        );
+
+        /* =====================================================
+           INITIALIZATION
+        ====================================================== */
+
+        /*
+         * IMPORTANT:
+         *
+         * We intentionally DO NOT call setupScratchCard()
+         * here because the invitation card is display:none.
+         *
+         * It will be initialized after the envelope opens.
+         */
+
+    });
+</script>
